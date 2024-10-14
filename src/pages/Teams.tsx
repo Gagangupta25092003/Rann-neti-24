@@ -1,53 +1,84 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import { fetchGoogleSheetData } from '../api/googleSheet.ts';
 
 type TeamMember = {
   name: string;
   role: string;
   image: string;
-}
+};
 
 type TeamSection = {
   title: string;
   members: TeamMember[];
-}
+};
 
 export default function Teams() {
-  const teamSections: TeamSection[] = [
-    {
-      title: "Governors and Co-Governors",
-      members: [
-        { name: "Dr. John Doe", role: "Governor", image: "/placeholder.svg?height=150&width=150" },
-        { name: "Prof. Jane Smith", role: "Co-Governor", image: "/placeholder.svg?height=150&width=150" },
-        { name: "Dr. Mike Johnson", role: "Co-Governor", image: "/placeholder.svg?height=150&width=150" },
-      ]
-    },
-    {
-      title: "Organizing Secretaries",
-      members: [
-        { name: "Sarah Brown", role: "Head Organizing Secretary", image: "/placeholder.svg?height=150&width=150" },
-        { name: "Tom Wilson", role: "Organizing Secretary", image: "/placeholder.svg?height=150&width=150" },
-        { name: "Emily Davis", role: "Organizing Secretary", image: "/placeholder.svg?height=150&width=150" },
-      ]
-    },
-    {
-      title: "Mentors",
-      members: [
-        { name: "Prof. Robert Green", role: "Senior Mentor", image: "/placeholder.svg?height=150&width=150" },
-        { name: "Dr. Lisa Chen", role: "Technical Mentor", image: "/placeholder.svg?height=150&width=150" },
-        { name: "Coach Alex Turner", role: "Sports Mentor", image: "/placeholder.svg?height=150&width=150" },
-      ]
-    },
-    {
-      title: "Team Heads",
-      members: [
-        { name: "Mark Thompson", role: "Sponsorship Head", image: "/placeholder.svg?height=150&width=150" },
-        { name: "Rachel Lee", role: "Planning and Event Management Head", image: "/placeholder.svg?height=150&width=150" },
-        { name: "Chris Evans", role: "Publicity Head", image: "/placeholder.svg?height=150&width=150" },
-        { name: "Olivia White", role: "Photography Head", image: "/placeholder.svg?height=150&width=150" },
-        { name: "Daniel Kim", role: "Videography Head", image: "/placeholder.svg?height=150&width=150" },
-      ]
-    },
-  ]
+  const [teamSections, setTeamSections] = useState<TeamSection[]>([]);
+
+  // const teamSections: TeamSection[] = [
+  //   {
+  //     title: "Governors and Co-Governors",
+  //     members: [
+  //       { name: "Dr. John Doe", role: "Governor", image: "/placeholder.svg?height=150&width=150" },
+  //       { name: "Prof. Jane Smith", role: "Co-Governor", image: "/placeholder.svg?height=150&width=150" },
+  //       { name: "Dr. Mike Johnson", role: "Co-Governor", image: "/placeholder.svg?height=150&width=150" },
+  //     ]
+  //   },
+  //   {
+  //     title: "Organizing Secretaries",
+  //     members: [
+  //       { name: "Sarah Brown", role: "Head Organizing Secretary", image: "/placeholder.svg?height=150&width=150" },
+  //       { name: "Tom Wilson", role: "Organizing Secretary", image: "/placeholder.svg?height=150&width=150" },
+  //       { name: "Emily Davis", role: "Organizing Secretary", image: "/placeholder.svg?height=150&width=150" },
+  //     ]
+  //   },
+  //   {
+  //     title: "Mentors",
+  //     members: [
+  //       { name: "Prof. Robert Green", role: "Senior Mentor", image: "/placeholder.svg?height=150&width=150" },
+  //       { name: "Dr. Lisa Chen", role: "Technical Mentor", image: "/placeholder.svg?height=150&width=150" },
+  //       { name: "Coach Alex Turner", role: "Sports Mentor", image: "/placeholder.svg?height=150&width=150" },
+  //     ]
+  //   },
+  //   {
+  //     title: "Team Heads",
+  //     members: [
+  //       { name: "Mark Thompson", role: "Sponsorship Head", image: "/placeholder.svg?height=150&width=150" },
+  //       { name: "Rachel Lee", role: "Planning and Event Management Head", image: "/placeholder.svg?height=150&width=150" },
+  //       { name: "Chris Evans", role: "Publicity Head", image: "/placeholder.svg?height=150&width=150" },
+  //       { name: "Olivia White", role: "Photography Head", image: "/placeholder.svg?height=150&width=150" },
+  //       { name: "Daniel Kim", role: "Videography Head", image: "/placeholder.svg?height=150&width=150" },
+  //     ]
+  //   },
+  // ]
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchGoogleSheetData();
+      console.log(data)
+      const sections: { [key: string]: TeamSection } = {};
+
+      data.forEach((row: any) => {
+        const { Title, Name, Role, Image } = row;
+
+        if (!sections[Title]) {
+          sections[Title] = {
+            title: Title,
+            members: []
+          };
+        }
+
+        sections[Title].members.push({
+          name: Name,
+          role: Role,
+          image: Image
+        });
+      });
+
+      setTeamSections(Object.values(sections));
+    }
+
+    fetchData();
+  }, []);
 
   return (
     <div className="bg-black text-white min-h-screen">
@@ -69,5 +100,5 @@ export default function Teams() {
         ))}
       </div>
     </div>
-  )
+  );
 }
