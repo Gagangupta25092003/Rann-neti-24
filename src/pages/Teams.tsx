@@ -60,20 +60,20 @@ export default function Teams() {
   return (
     <div className="bg-black text-white min-h-screen">
       <div className="container mx-auto px-2 py-12">
-        <h1 className="text-4xl font-bold text-center mb-12">Our Team</h1>
+        <h1 className="text-4xl font-bold text-center mb-4">Our Team</h1>
         {teamSections.map((section, index) => (
-          <div key={index} className="mb-16 text-center">
-            <h2 className="text-3xl font-semibold mb-8 text-red-600">{section.title}</h2>
+          <div key={index} className="mb-8 text-center">
+            <h2 className="text-3xl font-semibold mb-4 text-red-600">{section.title}</h2>
             <div className="flex flex-wrap justify-center gap-8">
               {section.members.map((member, memberIndex) => (
                 <div
                   key={memberIndex}
-                  className="bg-gray-900 rounded-lg p-6 flex flex-col justify-center items-center transform hover:scale-105 transition-transform duration-300 ease-in-out"
+                  className="bg-gray-900 rounded-lg p-4 flex flex-col justify-center items-center transform hover:scale-105 transition-transform duration-300 ease-in-out"
                 >
                   <img
                     src={member.image}
                     // alt={member.image}
-                    className="w-60 h-56 object-cover rounded-lg mb-4 shadow-lg"
+                    className="w-72 h-80 object-cover rounded-lg mb-4 shadow-lg"
                   />
                   <h3 className="text-xl font-semibold mb-2">{member.name}</h3>
                   <p className="text-gray-400">{member.role}</p>

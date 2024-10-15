@@ -10,7 +10,7 @@ function convertToEmbedUrl(openUrl: string): string {
 
   const idMatch = openUrl.match(/id=([^&]+)/);
   if (idMatch && idMatch[1]) {
-    const embedUrl = `https://drive.google.com/uc?export=view&id=${idMatch[1]}`;
+    const embedUrl = `https://drive.google.com/thumbnail?id=${idMatch[1]}`;
     console.log('Converted URL:', embedUrl);
     return embedUrl;
   }
