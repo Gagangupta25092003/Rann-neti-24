@@ -7,7 +7,7 @@ export default function Sponsors() {
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold mb-8 text-center">Our Sponsors</h2>
         <div className="flex justify-center">
-          <div className="w-64 h-40 flex justify-center items-center p-6 shadow-2xl rounded-lg transform hover:scale-110 transition-transform duration-300">
+          <div className="w-64 h-40 flex justify-center items-center p-6 shadow-2xl rounded-lg transform hover:scale-110 transition-transform duration-300 gap-10">
             <img
               src="https://static.vecteezy.com/system/resources/previews/020/190/451/non_2x/punjab-national-bank-pnb-bank-logo-free-free-vector.jpg"
               alt="Punjab National Bank"
