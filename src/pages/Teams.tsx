@@ -72,7 +72,7 @@ export default function Teams() {
                 >
                   <img
                     src={member.image}
-                    alt={member.image}
+                    // alt={member.image}
                     className="w-60 h-56 object-cover rounded-lg mb-4 shadow-lg"
                   />
                   <h3 className="text-xl font-semibold mb-2">{member.name}</h3>
