@@ -59,7 +59,7 @@ export default function Teams() {
 
   return (
     <div className="bg-black text-white min-h-screen">
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-2 py-12">
         <h1 className="text-4xl font-bold text-center mb-12">Our Team</h1>
         {teamSections.map((section, index) => (
           <div key={index} className="mb-16 text-center">
@@ -68,12 +68,12 @@ export default function Teams() {
               {section.members.map((member, memberIndex) => (
                 <div
                   key={memberIndex}
-                  className="bg-gray-900 rounded-lg p-6 flex flex-col justify-center items-center transform hover:scale-105 transition-transform duration-300 ease-in-out w-64"
+                  className="bg-gray-900 rounded-lg p-6 flex flex-col justify-center items-center transform hover:scale-105 transition-transform duration-300 ease-in-out"
                 >
                   <img
                     src={member.image}
-                    alt={member.name}
-                    className="w-40 h-56 object-cover rounded-lg mb-4 shadow-lg"
+                    alt={member.image}
+                    className="w-60 h-56 object-cover rounded-lg mb-4 shadow-lg"
                   />
                   <h3 className="text-xl font-semibold mb-2">{member.name}</h3>
                   <p className="text-gray-400">{member.role}</p>

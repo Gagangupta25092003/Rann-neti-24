@@ -18,6 +18,7 @@ function convertToEmbedUrl(openUrl: string): string {
   console.warn('No ID found in URL:', openUrl);
   return openUrl;
 }
+
 export async function fetchGoogleSheetData() {
   try {
     const res = await fetch(url);
@@ -25,7 +26,7 @@ export async function fetchGoogleSheetData() {
     const rawData = await csv().fromString(csv_text);
     const processedData = rawData.map((row: any) => ({
       ...row,
-      Image: row.Image ? convertToEmbedUrl(row.Image) : '/path/to/placeholder-image.jpg'
+      Image: convertToEmbedUrl(row.Image)
     }));
 
     console.log('Processed Data:', processedData);
