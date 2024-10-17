@@ -37,7 +37,7 @@ import React from "react";
 
 export default function Rules() {
   return (
-    <div className="container mx-auto px-6 py-12">
+    <div className="container mx-auto px-6 py-12 bg-black">
       <h1
         className="text-5xl font-bold mb-8"
         style={{ color: "#f0f0f0", textShadow: "2px 2px 5px #b22222" }} // Whitish grey and red shadow
@@ -87,7 +87,7 @@ export default function Rules() {
 
         {/* Detailed Rules Box */}
         <div
-          className="p-6 mt-8 rounded-lg bg-gradient-to-r from-red-800 to-black"
+          className="p-6 mt-8 rounded-lg bg-red-900"
           style={{
             // backgroundColor: "#2e0e0e", // Darker reddish-black background
             color: "#d3d3d3", // Greyish text color

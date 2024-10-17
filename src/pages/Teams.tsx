@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { fetchGoogleSheetData } from '../api/googleSheet.ts';
+import React, { useEffect, useState } from "react";
+import { fetchGoogleSheetData } from "../api/googleSheet.ts";
 
 type TeamMember = {
   name: string;
@@ -27,14 +27,14 @@ export default function Teams() {
         if (!sections[Title]) {
           sections[Title] = {
             title: Title,
-            members: []
+            members: [],
           };
         }
 
         sections[Title].members.push({
           name: Name,
           role: Role,
-          image: Image
+          image: Image,
         });
       });
       setTeamSections(Object.values(sections));
@@ -60,10 +60,17 @@ export default function Teams() {
   return (
     <div className="bg-black text-white min-h-screen">
       <div className="container mx-auto px-2 py-12">
-        <h1 className="text-4xl font-bold text-center mb-4">Our Team</h1>
+        <h1
+          className="text-4xl font-bold text-center mb-4"
+          style={{ color: "#f0f0f0", textShadow: "2px 2px 5px #b22222" }}
+        >
+          Our Team
+        </h1>
         {teamSections.map((section, index) => (
           <div key={index} className="mb-8 text-center">
-            <h2 className="text-3xl font-semibold mb-4 text-red-600">{section.title}</h2>
+            <h2 className="text-3xl font-semibold mb-4 text-red-600">
+              {section.title}
+            </h2>
             <div className="flex flex-wrap justify-center gap-8">
               {section.members.map((member, memberIndex) => (
                 <div
@@ -73,7 +80,7 @@ export default function Teams() {
                   <img
                     src={member.image}
                     // alt={member.image}
-                    className="w-72 h-80 object-cover rounded-lg mb-4 shadow-lg"
+                    className="w-56 h-64 object-cover rounded-lg mb-4 shadow-lg"
                   />
                   <h3 className="text-xl font-semibold mb-2">{member.name}</h3>
                   <p className="text-gray-400">{member.role}</p>
