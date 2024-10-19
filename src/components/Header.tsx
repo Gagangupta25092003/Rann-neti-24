@@ -44,7 +44,9 @@ export default function Header() {
             <li><Link to="/about" className="hover:text-red-600">About</Link></li>
             <li><Link to="/teams" className="hover:text-red-600">Teams</Link></li>
             <li><Link to="/games" className="hover:text-red-600">Games</Link></li>
+            <li><Link to="/participants" className="hover:text-red-600">Participants</Link></li>
             <li><Link to="/rules" className="hover:text-red-600">Rules</Link></li>
+            <li><Link to="/register" className="hover:text-red-600">Register</Link></li>
           </ul>
         </div>
 

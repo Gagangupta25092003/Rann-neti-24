@@ -7,6 +7,8 @@ import About from "./pages/About.tsx";
 import Teams from "./pages/Teams.tsx";
 import Games from "./pages/Games.tsx";
 import Rules from "./pages/Rules.tsx";
+import Participants from "./pages/Participants.tsx";
+import Register from "./pages/Register.tsx"
 
 export default function App() {
   return (
@@ -32,7 +34,9 @@ export default function App() {
               <Route path="/about" element={<About />} />
               <Route path="/teams" element={<Teams />} />
               <Route path="/games" element={<Games />} />
+              <Route path="/participants" element={<Participants />} />
               <Route path="/rules" element={<Rules />} />
+              <Route path="/register" element={<Register />} />
             </Routes>
           </main>
           <Footer />
