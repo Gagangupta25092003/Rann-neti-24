@@ -39,14 +39,14 @@ export default function Header() {
           </div>
 
           {/* Navigation Links (hidden on small screens, visible on medium and above) */}
-          <ul className="hidden md:flex space-x-2 md:space-x-4 text-sm md:text-xl">
-            <li><Link to="/" className="hover:text-red-600">Home</Link></li>
-            <li><Link to="/about" className="hover:text-red-600">About</Link></li>
-            <li><Link to="/teams" className="hover:text-red-600">Teams</Link></li>
-            <li><Link to="/games" className="hover:text-red-600">Games</Link></li>
-            <li><Link to="/participants" className="hover:text-red-600">Participants</Link></li>
-            <li><Link to="/rules" className="hover:text-red-600">Rules</Link></li>
-            <li><Link to="/register" className="hover:text-red-600">Register</Link></li>
+          <ul className="hidden md:flex space-x-2 md:space-x-6 text-sm md:text-xl">
+            <li><Link to="/" className="hover:text-red-600 text-base">Home</Link></li>
+            <li><Link to="/about" className="hover:text-red-600 text-base">About</Link></li>
+            <li><Link to="/teams" className="hover:text-red-600 text-base">Teams</Link></li>
+            <li><Link to="/games" className="hover:text-red-600 text-base">Games</Link></li>
+            <li><Link to="/participants" className="hover:text-red-600 text-base">Participants</Link></li>
+            <li><Link to="/rules" className="hover:text-red-600 text-base">Rules</Link></li>
+            <li><Link to="/register" className="hover:text-red-600 text-base">Register</Link></li>
           </ul>
         </div>
 
@@ -57,7 +57,10 @@ export default function Header() {
             <li><Link to="/about" className="block px-2 py-1 hover:text-red-600 w-full text-center" onClick={toggleMenu}>About</Link></li>
             <li><Link to="/teams" className="block px-2 py-1 hover:text-red-600 w-full text-center" onClick={toggleMenu}>Teams</Link></li>
             <li><Link to="/games" className="block px-2 py-1 hover:text-red-600 w-full text-center" onClick={toggleMenu}>Games</Link></li>
+            <li><Link to="/participants" className="block px-2 py-1 hover:text-red-600 w-full text-center" onClick={toggleMenu}>Participants</Link></li>
             <li><Link to="/rules" className="block px-2 py-1 hover:text-red-600 w-full text-center" onClick={toggleMenu}>Rules</Link></li>
+            <li><Link to="/register" className="block px-2 py-1 hover:text-red-600 w-full text-center" onClick={toggleMenu}>Register</Link></li>
+
           </ul>
         )}
       </nav>

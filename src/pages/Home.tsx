@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Sponsors from "./Sponsors.tsx";
-import Timer from "../components/timer.js"; // Import Timer component
+import { Link } from "react-router-dom";
+
 import CountdownTimer from "../components/CountdownTimer.tsx";
 
 export default function Home() {
@@ -10,7 +11,7 @@ export default function Home() {
   const [x4, setX4] = useState(0);
 
   const targets = [20, 1000, 10, 10000]; // Target values for x1, x2, x3, x4
-  const duration = 5000; // Animation duration (ms)
+  const duration = 4000; // Animation duration (ms)
 
   // Generic function to animate a number from 0 to a target value
   const animateNumber = (setValue, target) => {
@@ -66,10 +67,18 @@ export default function Home() {
         </div>
 
         {/* Right Column with Timer - below the left column and also centered */}
-        <div className="flex items-center justify-center w-full max-w-md">
+        <div className="flex flex-col items-center justify-center w-full max-w-md space-y-8">
           <div className="timer text-7xl ">
             {/* <Timer /> */}
             <CountdownTimer targetDate={targetDate} />
+          </div>
+          <div className=" bg-red-900 py-2 px-4 rounded-3xl text-2xl ">
+            <Link
+              to="/register"
+              className="block px-2 py-1 hover:text-red-600 w-full text-center"
+            >
+              Register
+            </Link>
           </div>
         </div>
       </div>
@@ -83,17 +92,12 @@ export default function Home() {
         <div className="container flex flex-col items-center justify-between w-full p-10">
           {/* Left Box - About Text */}
           <div className="w-72 md:w-1/3">
-            {/* <img
-              src="/logo.jpg" // Replace with your actual logo path
-              alt="Rann-neti Logo"
-              className="w-1000 h-1000" // Adjust width and height as necessary
-            /> */}
             <img src="./logo.jpg" alt="Your Image" className="w-full" />
           </div>
           <div className=" md:w-2/3 text-center md:text-left mb-8 md:mb-0">
-            <h2 className="text-4xl font-bold mb-4">About Rann-Neti' 2024</h2>
+            <h2 className="text-4xl font-bold mb-4">About Rann-Neeti' 2024</h2>
             <p className="text-lg mb-6">
-              Rann-neti' 2024 is an exciting sports fest held at IIT Mandi from
+              Rann-Neeti' 2024 is an exciting sports fest held at IIT Mandi from
               October 26 to 28, 2024. It brings together athletes from various
               institutions to compete in a wide range of sports.
             </p>

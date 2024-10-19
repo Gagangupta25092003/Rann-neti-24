@@ -9,7 +9,7 @@ export default function About() {
       <div>
         <h1 className="text-4xl font-bold mb-8" style={{ color: "#f0f0f0", textShadow: "2px 2px 5px #b22222" }}>About Rann-Neeti' 2024</h1>
         <p className="text-lg mb-6">
-          Rann-neti' 2024 is an exciting sports fest held at IIT Mandi from
+          Rann-Neeti' 2024 is an exciting sports fest held at IIT Mandi from
           October 26 to 28, 2024 . It brings together athletes from various
           institutions to compete in a wide range of sports.
         </p>

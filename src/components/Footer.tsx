@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center mb-2 text-xl">
           <p className=" text-center md:text-left">
-            &copy; 2024 Rann-neti' Sports Fest. All rights reserved.
+            &copy; 2024 Rann-Neeti' Sports Fest. All rights reserved.
           </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <a href="https://www.facebook.com/Rannneetivqv/" className="hover:text-red-600  transition-colors">Facebook</a>
