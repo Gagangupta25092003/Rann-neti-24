@@ -58,7 +58,10 @@ export default function Header() {
             <li><Link to="/about" className="block px-2 py-1 hover:text-red-600 w-full text-center" onClick={toggleMenu}>About</Link></li>
             <li><Link to="/teams" className="block px-2 py-1 hover:text-red-600 w-full text-center" onClick={toggleMenu}>Teams</Link></li>
             <li><Link to="/games" className="block px-2 py-1 hover:text-red-600 w-full text-center" onClick={toggleMenu}>Games</Link></li>
+            <li><Link to="/participants" className="block px-2 py-1 hover:text-red-600 w-full text-center" onClick={toggleMenu}>Participants</Link></li>
             <li><Link to="/rules" className="block px-2 py-1 hover:text-red-600 w-full text-center" onClick={toggleMenu}>Rules</Link></li>
+            <li><Link to="/register" className="block px-2 py-1 hover:text-red-600 w-full text-center" onClick={toggleMenu}>Register</Link></li>
+
           </ul>
         )}
       </nav>

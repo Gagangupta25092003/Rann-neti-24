@@ -2,7 +2,7 @@ import React from 'react';
 
 const Register = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-scree p-4">
+    <div className="bg-black flex flex-col items-center justify-center min-h-scree p-4">
       <h1 className="text-3xl font-bold mb-6 text-center text-red-600">
         Register for Events
       </h1>

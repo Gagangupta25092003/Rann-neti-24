@@ -57,7 +57,7 @@ export default function Rules() {
   return (
     <div className="container mx-auto px-6 py-12 bg-black">
       <h1
-        className="text-5xl font-bold mb-8"
+        className="text-4xl font-bold mb-8"
         style={{ color: "#f0f0f0", textShadow: "2px 2px 5px #b22222" }} // Whitish grey and red shadow
       >
         Rules and Regulations
@@ -65,18 +65,14 @@ export default function Rules() {
       <div className="space-y-6">
         <section>
           <h2
-            className="text-3xl font-bold mb-4"
+            className="text-2xl font-bold mb-4"
             style={{ color: "#f0f0f0", textShadow: "1px 1px 3px #b22222" }} // Whitish grey and red shadow
           >
             Match Rules
           </h2>
           <ul
-            className="list-disc list-inside text-lg"
-            style={{
-              color: "#f0f0f0",
-              textShadow: "1px 1px 2px #b22222",
-              fontSize: "1.25rem",
-            }} // Slightly larger font size
+            className="list-disc list-inside text-base"
+             // Slightly larger font size
           >
             <li>
               Every player should have their hardcopy college ID card during the

@@ -81,10 +81,10 @@ const SportsParticipants: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mb-4"></div>
-          <p className="text-gray-600">Loading participants data...</p>
+      <div className="flex bg-black justify-center items-center min-h-screen">
+        <div className="flex items-center flex-col text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mb-4"></div>
+          <p className="text-white text-sm">Loading participants data...</p>
         </div>
       </div>
     );
@@ -92,12 +92,12 @@ const SportsParticipants: React.FC = () => {
 
   if (error) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div className=" bg-black flex justify-center items-center min-h-screen">
         <div className="text-center text-red-600">
           <p>{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-red-500"
           >
             Retry
           </button>
@@ -107,7 +107,7 @@ const SportsParticipants: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto p-4 min-h-screen">
+    <div className=" bg-black container mx-auto p-4 min-h-screen">
       <div className="mb-6">
         <div className="flex flex-wrap gap-2">
           {(Object.entries(SPORTS_CONFIG) as [SportKeys, { label: string }][]).map(([key, { label }]) => (
@@ -126,26 +126,26 @@ const SportsParticipants: React.FC = () => {
       <div className="mt-4">
         <h2 className="text-2xl font-bold mb-4">
           {SPORTS_CONFIG[activeTab].label} Participants
-          <span className="text-sm font-normal ml-2 text-gray-500">
+          <span className="text-sm font-normal ml-2 text-white">
             (Total: {getParticipantsForSport(activeTab).length})
           </span>
         </h2>
 
-        <div className="overflow-x-auto rounded-lg border border-red-600">
-          <table className="min-w-full bg-gray-800 text-white">
+        <div className="overflow-x-auto rounded-lg ">
+          <table className="min-w-full bg-red-900 text-white">
             <thead>
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">S.No</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">College Name</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Number of Participants</th>
+                <th className="text-center px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">S.No</th>
+                <th className="text-center px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">College Name</th>
+                <th className="text-center px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Number of Participants</th>
               </tr>
             </thead>
             <tbody>
               {getParticipantsForSport(activeTab).map((row) => (
-                <tr key={row.sno} className="hover:bg-gray-700">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm">{row.sno}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm">{row.collegeName}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm">{row.participantsCount}</td>
+                <tr key={row.sno} className="hover:bg-red-700">
+                  <td className="text-center px-6 py-4 whitespace-nowrap text-sm">{row.sno}</td>
+                  <td className="text-center px-6 py-4 whitespace-nowrap text-sm">{row.collegeName}</td>
+                  <td className="text-center px-6 py-4 whitespace-nowrap text-sm">{row.participantsCount}</td>
                 </tr>
               ))}
               {getParticipantsForSport(activeTab).length === 0 && (
