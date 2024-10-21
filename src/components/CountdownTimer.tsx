@@ -15,7 +15,7 @@ const CountdownTimer = ({ targetDate }) => {
                 seconds: Math.floor((difference % (1000 * 60)) / 1000),
             };
         }
-        console.log(timeLeft);
+        // console.log(timeLeft);
         return timeLeft;
     };
 

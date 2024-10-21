@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Sponsors from "./Sponsors.tsx";
 import Timer from "../components/timer.js"; // Import Timer component
 import CountdownTimer from "../components/CountdownTimer.tsx";
+import ImageCarousel from "./ImageCarousel.tsx";
 
 export default function Home() {
   const [x1, setX1] = useState(0);
@@ -93,9 +94,10 @@ export default function Home() {
           <div className=" md:w-2/3 text-center md:text-left mb-8 md:mb-0">
             <h2 className="text-4xl font-bold mb-4">About Rann-Neti' 2024</h2>
             <p className="text-lg mb-6">
-              Rann-neti' 2024 is an exciting sports fest held at IIT Mandi from
-              October 26 to 28, 2024. It brings together athletes from various
-              institutions to compete in a wide range of sports.
+              Rann-neeti' 2024 is the largest Inter collegiate sports fest of
+              the Himalayas held at IIT Mandi from October 26 to 28, 2024. It
+              brings together athletes from various institutions to compete in a
+              wide range of sports.
             </p>
             <p className="text-lg mb-6">
               Our mission is to promote sportsmanship, teamwork, and healthy
@@ -116,7 +118,7 @@ export default function Home() {
               possess as a nation.
             </p>
             <h2 className="text-2xl font-bold mt-8 mb-4">
-              What you take back?
+              What's your key takeaway?
             </h2>
             <p className="mt-4 text-lg">
               It is that time of the year when champions rise from the ashes on
@@ -149,7 +151,7 @@ export default function Home() {
             <p>{x3}+</p>
             <p className="text-lg">Events</p>
           </div>
-          <div className="flex flex-col  md:border-b-0 py-4 md:py-0  md:px-16 md:py-0 ">
+          <div className="flex flex-col  md:border-b-0 py-4 md:py-0  md:px-16 ">
             <p>{x4}+</p>
             <p className="text-lg">Reach</p>
           </div>
@@ -176,6 +178,15 @@ export default function Home() {
       {/* Sponsors component at the bottom */}
       <div className="sponsor mt-10">
         <Sponsors />
+      </div>
+      {/* <div className="image mt-10">
+        <ImageCarousel />
+      </div> */}
+      <div
+        className="image mt-10"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        <ImageCarousel />
       </div>
     </div>
   );

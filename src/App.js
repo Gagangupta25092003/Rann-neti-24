@@ -8,6 +8,7 @@ import Teams from "./pages/Teams.tsx";
 import Games from "./pages/Games.tsx";
 import Rules from "./pages/Rules.tsx";
 import Participants from "./pages/Participants.tsx";
+import Gallery from "./pages/Gallery.tsx";
 import Register from "./pages/Register.tsx"
 
 export default function App() {
@@ -25,7 +26,7 @@ export default function App() {
             minHeight: "100vh",
           }}
         ></div>
-        
+
         <div className="relative z-10 flex flex-col ">
           <Header />
           <main className="flex-grow">
@@ -36,6 +37,7 @@ export default function App() {
               <Route path="/games" element={<Games />} />
               <Route path="/participants" element={<Participants />} />
               <Route path="/rules" element={<Rules />} />
+              <Route path="/gallery" element={<Gallery />} />
               <Route path="/register" element={<Register />} />
             </Routes>
           </main>
