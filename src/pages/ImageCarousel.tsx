@@ -4,40 +4,25 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 const ImageCarousel: React.FC = () => {
   const [images, setImages] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const csvUrl =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vTTNfCvp-k03Id1DuoptahhuQJqGSjjzFiyxbcfLzQNKFE4aN-6SLRkz2_NSXX5-IRH-nxYVpjIiaj1/pub?output=csv";
-  
-  // Function to convert Google Drive link to embeddable thumbnail link
-  function convertToEmbedUrl(openUrl: string): string {
-    if (!openUrl || typeof openUrl !== "string") {
-      console.warn("Invalid URL:", openUrl);
-      return "";
-    }
-  
-    const idMatch = openUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
-    if (idMatch && idMatch[1]) {
-      return `https://drive.google.com/thumbnail?id=${idMatch[1]}`;
-    }
-  
-    console.warn("No ID found in URL:", openUrl);
-    return openUrl;
-  }
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQe_1BJKgVUkOKbAZ72hd3ogGpWV_UKnORVel7r_ahgZoR6QqTa-qtfA_oszs4_IfLNs0Lic3SRCEUG/pub?output=csv";
 
   useEffect(() => {
     const fetchImages = async () => {
       const response = await fetch(csvUrl);
       const csvText = await response.text();
+
       const rows = csvText.split("\n");
-      const imageUrls = rows.map((row) => convertToEmbedUrl(row.split(",")[0].trim()));
+      const imageUrls = rows.map((row) => row.split(",")[0].trim());
       setImages(imageUrls.filter((url) => url));
     };
 
     fetchImages();
 
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 768); // Define small screen size breakpoint
+      setScreenWidth(window.innerWidth);
     };
 
     window.addEventListener("resize", handleResize);
@@ -49,28 +34,21 @@ const ImageCarousel: React.FC = () => {
   }, [csvUrl]);
 
   const nextImage = () => {
-    if (isSmallScreen) {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    } else {
-      setCurrentIndex((prevIndex) =>
-        prevIndex + 3 >= images.length ? 0 : prevIndex + 3
-      );
-    }
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
   const prevImage = () => {
-    if (isSmallScreen) {
-      setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-    } else {
-      setCurrentIndex((prevIndex) =>
-        prevIndex - 3 < 0 ? images.length - 3 : prevIndex - 3
-      );
-    }
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+    );
   };
 
-  const displayedImages = isSmallScreen
-    ? [images[currentIndex]] // Show 1 image on small screens
-    : images.slice(currentIndex, currentIndex + 3); // Show 3 images on larger screens
+  const displayedImages =
+    screenWidth < 480
+      ? [images[currentIndex]] // One image below 480px
+      : screenWidth < 620
+      ? images.slice(currentIndex, currentIndex + 2) // Two images between 480px and 620px
+      : images.slice(currentIndex, currentIndex + 3); // Three images on larger screens
 
   return (
     <div
@@ -88,7 +66,7 @@ const ImageCarousel: React.FC = () => {
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: screenWidth < 480 ? "center" : "space-between",
           width: "100%",
           maxWidth: "500px",
           padding: "0 10px",
@@ -101,7 +79,12 @@ const ImageCarousel: React.FC = () => {
               border: "2px solid aliceblue",
               padding: "5px",
               margin: "0 5px",
-              width: isSmallScreen ? "220px" : "150px",
+              width:
+                screenWidth < 480
+                  ? "220px"
+                  : screenWidth < 620
+                  ? "44%"
+                  : "150px", // Adjust width to 44% between 480px and 620px
               height: "200px",
               display: "flex",
               justifyContent: "center",
@@ -110,7 +93,7 @@ const ImageCarousel: React.FC = () => {
           >
             <img
               src={image}
-              alt={`carousel-${currentIndex}`}
+              // alt={carousel-${currentIndex}}
               style={{
                 height: "100%",
                 width: "100%",
@@ -121,34 +104,48 @@ const ImageCarousel: React.FC = () => {
         ))}
       </div>
 
-      {/* Buttons for navigation */}
-      <button
-        onClick={prevImage}
+      {/* Button Container */}
+      <div
         style={{
-          position: "absolute",
-          left: "10px",
-          background: "none",
-          border: "none",
-          cursor: "pointer",
-          padding: "10px",
+          display: "flex",
+          justifyContent: screenWidth < 768 ? "space-between" : "center",
+          width: "100%",
+          marginTop: screenWidth < 768 ? "10px" : "0", // Add margin below image container for smaller screens
+          position: screenWidth >= 768 ? "absolute" : "static", // Absolute for larger screens
+          top: screenWidth >= 768 ? "50%" : "auto", // Vertically center buttons for large screens
+          transform: screenWidth >= 768 ? "translateY(-50%)" : "none", // Adjust for large screens
         }}
       >
-        <FaChevronLeft size={24} />
-      </button>
+        {/* Previous Button */}
+        <button
+          onClick={prevImage}
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: "10px",
+            position: screenWidth >= 768 ? "absolute" : "static", // Absolute for larger screens
+            left: screenWidth >= 768 ? "10px" : "auto", // Close to the image on larger screens
+          }}
+        >
+          <FaChevronLeft size={24} />
+        </button>
 
-      <button
-        onClick={nextImage}
-        style={{
-          position: "absolute",
-          right: "10px",
-          background: "none",
-          border: "none",
-          cursor: "pointer",
-          padding: "10px",
-        }}
-      >
-        <FaChevronRight size={24} />
-      </button>
+        {/* Next Button */}
+        <button
+          onClick={nextImage}
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: "10px",
+            position: screenWidth >= 768 ? "absolute" : "static", // Absolute for larger screens
+            right: screenWidth >= 768 ? "10px" : "auto", // Close to the image on larger screens
+          }}
+        >
+          <FaChevronRight size={24} />
+        </button>
+      </div>
     </div>
   );
 };
