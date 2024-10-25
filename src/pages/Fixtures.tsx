@@ -27,6 +27,7 @@ const SPORTS_CONFIG = {
   'Chess': { label: 'Chess' },
   'Badminton-Men': { label: 'Badminton (Men)' },
   'Badminton-Women': { label: 'Badminton (Women)' },
+  'LawnTennis-Men': { label: 'Lawn Tennis (Men)' },
 } as const;
 
 type SportKeys = keyof typeof SPORTS_CONFIG;
@@ -44,16 +45,24 @@ const FixturesPage: React.FC = () => {
         if (!Array.isArray(data)) {
           throw new Error('Data received is not an array');
         }
-        // Clean and validate the data
-        const cleanedData = data.filter(row => {
-          return row && 
-                 row.Game && 
-                 row['Match No.'] && 
-                 row.Day && 
-                 row.Timings && 
-                 row['Team A'] && 
-                 row['Team B'];
-        });
+        
+        // Clean and normalize the data as it comes in
+        const cleanedData = data
+          .filter(row => 
+            row && 
+            row.Game && 
+            row['Match No.'] && 
+            row.Day && 
+            row.Timings && 
+            row['Team A'] && 
+            row['Team B']
+          )
+          .map(row => ({
+            ...row,
+            // Normalize the Game field to match SPORTS_CONFIG keys
+            Game: normalizeGameName(row.Game)
+          }));
+        
         setFixtures(cleanedData);
         setLoading(false);
       } catch (err) {
@@ -64,20 +73,60 @@ const FixturesPage: React.FC = () => {
     fetchData();
   }, []);
 
-  const renderFixtures = (game: SportKeys) => {
-    // Improved filtering to handle case sensitivity and whitespace
-    const filteredFixtures = fixtures.filter(fixture => 
-      fixture.Game.trim().toLowerCase() === game.toLowerCase()
-    );
+  // Helper function to normalize game names
+  const normalizeGameName = (gameName: string): string => {
+    // Remove extra spaces and convert to lowercase for comparison
+    const normalized = gameName.trim().toLowerCase();
+    
+    // Map normalized names to SPORTS_CONFIG keys
+    const gameMap: Record<string, SportKeys> = {
+      'cricket': 'Cricket',
+      'football': 'Football',
+      'hockey': 'Hockey',
+      'basketball men': 'Basketball-Men',
+      'basketball (men)': 'Basketball-Men',
+      'basketball women': 'Basketball-Women',
+      'basketball (women)': 'Basketball-Women',
+      'volleyball men': 'Volleyball-Men',
+      'volleyball (men)': 'Volleyball-Men',
+      'volleyball women': 'Volleyball-Women',
+      'volleyball (women)': 'Volleyball-Women',
+      'table tennis men': 'TableTennis-Men',
+      'table tennis (men)': 'TableTennis-Men',
+      'table tennis women': 'TableTennis-Women',
+      'table tennis (women)': 'TableTennis-Women',
+      'chess': 'Chess',
+      'badminton men': 'Badminton-Men',
+      'badminton (men)': 'Badminton-Men',
+      'badminton women': 'Badminton-Women',
+      'badminton (women)': 'Badminton-Women',
+      'lawn tennis men': 'LawnTennis-Men',
+      'lawn tennis (men)': 'LawnTennis-Men',
+    };
 
-    // Sort fixtures by Day and Match No
+    return gameMap[normalized] || gameName;
+  };
+
+  const renderFixtures = (game: SportKeys) => {
+    // Log for debugging
+    console.log('Current game:', game);
+    console.log('Available fixtures:', fixtures);
+    
+    const filteredFixtures = fixtures.filter(fixture => {
+      const fixtureGame = fixture.Game;
+      const matches = fixtureGame === game;
+      
+      // Log for debugging
+      console.log('Comparing:', { fixtureGame, game, matches });
+      
+      return matches;
+    });
+
     const sortedFixtures = filteredFixtures.sort((a, b) => {
-      // First sort by Day
       const dayA = parseInt(a.Day.replace(/\D/g, ''));
       const dayB = parseInt(b.Day.replace(/\D/g, ''));
       if (dayA !== dayB) return dayA - dayB;
-      
-      // Then sort by Match No
+
       const matchNoA = parseInt(a['Match No.'].replace(/\D/g, ''));
       const matchNoB = parseInt(b['Match No.'].replace(/\D/g, ''));
       return matchNoA - matchNoB;
@@ -85,8 +134,7 @@ const FixturesPage: React.FC = () => {
 
     return sortedFixtures.length ? (
       sortedFixtures.map((fixture, index) => (
-        <tr key={`${fixture.Game}-${fixture.Day}-${fixture['Match No.']}`} 
-            className="hover:bg-red-700">
+        <tr key={`${fixture.Game}-${fixture.Day}-${fixture['Match No.']}`} className="hover:bg-red-700">
           <td className="text-center px-6 py-4 text-sm">{fixture['Match No.']}</td>
           <td className="text-center px-6 py-4 text-sm">{fixture.Day}</td>
           <td className="text-center px-6 py-4 text-sm">{fixture.Timings}</td>
@@ -102,7 +150,6 @@ const FixturesPage: React.FC = () => {
     );
   };
 
-  // Rest of the component remains the same
   if (loading) {
     return (
       <div className="flex bg-black justify-center items-center min-h-screen">
@@ -136,8 +183,7 @@ const FixturesPage: React.FC = () => {
             <button
               key={key}
               onClick={() => setActiveTab(key)}
-              className={`px-3 py-1 text-sm font-medium rounded-t-lg transition-colors
-                ${activeTab === key ? 'bg-red-600 text-white' : 'bg-gray-700 text-gray-300 hover:bg-red-600'}`}
+              className={`px-3 py-1 text-sm font-medium rounded-t-lg transition-colors ${activeTab === key ? 'bg-red-600 text-white' : 'bg-gray-700 text-gray-300 hover:bg-red-600'}`}
             >
               {label}
             </button>
@@ -148,7 +194,7 @@ const FixturesPage: React.FC = () => {
         <h2 className="text-2xl font-bold mb-4 text-white">
           {SPORTS_CONFIG[activeTab].label} Fixtures
           <span className="text-sm font-normal ml-2">
-            (Total: {fixtures.filter(f => f.Game.trim().toLowerCase() === activeTab.toLowerCase()).length})
+            (Total: {fixtures.filter(f => f.Game === activeTab).length})
           </span>
         </h2>
 
