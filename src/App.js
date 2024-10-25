@@ -10,6 +10,7 @@ import Rules from "./pages/Rules.tsx";
 import Participants from "./pages/Participants.tsx";
 import Gallery from "./pages/Gallery.tsx";
 import Register from "./pages/Register.tsx"
+import Fixture from "./pages/Fixtures.tsx"
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
               <Route path="/participants" element={<Participants />} />
               <Route path="/rules" element={<Rules />} />
               <Route path="/gallery" element={<Gallery />} />
+              <Route path="/fixture" element={<Fixture />} />
               <Route path="/register" element={<Register />} />
             </Routes>
           </main>
